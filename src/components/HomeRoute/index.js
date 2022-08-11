@@ -116,7 +116,7 @@ class HomeRoute extends Component {
         <div className="home-app-container">
           {this.renderHomePoster()}
           <div className="home-responsive-container">
-            <h1 className="slide-title">Trending now</h1>
+            <h1 className="slide-title">Trending Now</h1>
 
             <TrendingRoute />
 

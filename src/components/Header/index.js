@@ -1,7 +1,8 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Redirect, withRouter} from 'react-router-dom'
 import {ImCross} from 'react-icons/im'
 import {HiOutlineSearch} from 'react-icons/hi'
+import Cookies from 'js-cookie'
 
 import './index.css'
 
@@ -11,7 +12,7 @@ class Header extends Component {
     showSearchBar: false,
   }
 
-  onClickSearchBar = () => {
+  onClickShowSearchBar = () => {
     this.setState({showSearchBar: true})
   }
 
@@ -23,11 +24,9 @@ class Header extends Component {
     this.setState({showMenu: false})
   }
 
-  onEnterSearchInput = event => {
+  onEnterSearchInput = () => {
     const {enterSearchInput} = this.props
-    if (event.key === 'Enter') {
-      enterSearchInput()
-    }
+    enterSearchInput()
   }
 
   onChangeSearchInput = event => {
@@ -37,26 +36,34 @@ class Header extends Component {
 
   renderSearchInput = () => {
     const {searchInput} = this.props
+
     return (
       <div className="search-container-div">
         <input
           type="search"
           className="input-element"
           onChange={this.onChangeSearchInput}
-          onKeyDown={this.onEnterSearchInput}
           value={searchInput}
         />
-        <img
-          src="https://res.cloudinary.com/dtvpdvwm9/image/upload/v1659945688/search_q8fkz2.png"
-          alt="search"
-          className="search-icon"
-        />
+        <button
+          type="button"
+          onClick={this.onEnterSearchInput}
+          className="menu-btn"
+          testid="searchButton"
+        >
+          <HiOutlineSearch className="search-Hi-icon" />
+        </button>
       </div>
     )
   }
 
   render() {
     const {showMenu, showSearchBar} = this.state
+    console.log(showSearchBar)
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
 
     return (
       <nav className="nav-container">
@@ -85,12 +92,10 @@ class Header extends Component {
                   <button
                     type="button"
                     className="menu-btn"
-                    onClick={this.onClickSearchBar}
+                    testid="searchButton"
+                    onClick={this.onClickShowSearchBar}
                   >
-                    <HiOutlineSearch
-                      className="search-Hi-icon"
-                      testid="searchButton"
-                    />
+                    <HiOutlineSearch className="search-Hi-icon" />
                   </button>
                 </Link>
               )}
@@ -112,12 +117,10 @@ class Header extends Component {
                 <button
                   type="button"
                   className="menu-btn"
-                  onClick={this.onClickSearchBar}
+                  testid="searchButton"
+                  onClick={this.onClickShowSearchBar}
                 >
-                  <HiOutlineSearch
-                    className="search-Hi-icon"
-                    testid="searchButton"
-                  />
+                  <HiOutlineSearch className="search-Hi-icon" />
                 </button>
               </Link>
             )}
@@ -151,6 +154,7 @@ class Header extends Component {
                 className="menu-btn"
                 type="button"
                 onClick={this.onClickHideMenu}
+                testid="searchButton"
               >
                 <ImCross className="list-item" />
               </button>
@@ -161,4 +165,4 @@ class Header extends Component {
     )
   }
 }
-export default Header
+export default withRouter(Header)

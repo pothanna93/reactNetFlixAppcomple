@@ -3,7 +3,7 @@ import FooterRoute from '../FooterRoute'
 import Header from '../Header'
 import './index.css'
 
-const Account = props => {
+const AccountRoute = props => {
   const username = localStorage.getItem('username')
   const password = localStorage.getItem('password')
 
@@ -21,7 +21,7 @@ const Account = props => {
         <h1>Account</h1>
         <hr className="hr-line" />
         <div className="member-details-container">
-          <p className="membership-heading">Membership</p>
+          <p className="membership-heading">Member ship</p>
           <div>
             <p className="membership-email">{username}@gmail.com</p>
             <p className="membership-password">Password:{passwordInAsterisk}</p>
@@ -29,7 +29,7 @@ const Account = props => {
         </div>
         <hr className="hr-line" />
         <div className="membership-container">
-          <p className="membership-heading">Plan Details</p>
+          <p className="membership-heading">Plan details</p>
           <p className="membership-premium">Premium</p>
           <p className="ultra-hd">Ultra HD</p>
         </div>
@@ -49,4 +49,4 @@ const Account = props => {
   )
 }
 
-export default Account
+export default AccountRoute

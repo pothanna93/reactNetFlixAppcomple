@@ -1,10 +1,12 @@
 import {Component} from 'react'
+
 import Cookies from 'js-cookie'
+
 import Loader from 'react-loader-spinner'
 import {Link} from 'react-router-dom'
+import Header from '../Header'
 
 import FailureView from '../FailureView'
-import Header from '../Header'
 
 import './index.css'
 
@@ -22,14 +24,9 @@ class SearchRoute extends Component {
     searchInput: '',
   }
 
-  componentDidMount() {
-    this.getSearchItems()
-  }
-
-  getSearchItems = async () => {
-    this.setState({apiStatus: apiStatusConstants.inProgress})
+  onClickSearch = async () => {
+    this.setState({apiStatus: apiStatusConstants.initial})
     const {searchInput} = this.state
-    console.log(searchInput)
 
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/movies-app/movies-search?search=${searchInput}`
@@ -41,16 +38,15 @@ class SearchRoute extends Component {
       },
     }
     const response = await fetch(apiUrl, options)
+
     if (response.ok === true) {
       const data = await response.json()
-
       const updatedData = data.results.map(each => ({
         posterPath: each.poster_path,
         title: each.title,
         id: each.id,
         backdropPath: each.backdrop_path,
       }))
-      // console.log(updatedData)
       this.setState({
         searchMovies: updatedData,
         apiStatus: apiStatusConstants.success,
@@ -63,11 +59,14 @@ class SearchRoute extends Component {
   }
 
   enterSearchInput = () => {
-    this.getSearchItems()
+    const {searchInput} = this.state
+    if (searchInput.length !== 0) {
+      this.onClickSearch()
+    }
   }
 
-  changeSearchInput = searchInput => {
-    this.setState({searchInput})
+  changeSearchInput = text => {
+    this.setState({searchInput: text})
   }
 
   renderNoSearchFound = () => {
@@ -118,11 +117,11 @@ class SearchRoute extends Component {
   }
 
   onRetry = () => {
-    this.getHomePagePoster()
+    this.onClickSearch()
   }
 
   renderFailureView = () => (
-    <div className="original-fail-container">
+    <div className="search-fail-container">
       <FailureView onRetry={this.onRetry} />
     </div>
   )
@@ -149,6 +148,7 @@ class SearchRoute extends Component {
 
   render() {
     const {searchInput} = this.state
+
     return (
       <>
         <div className="search-container">

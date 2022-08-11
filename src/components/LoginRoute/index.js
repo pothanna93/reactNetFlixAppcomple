@@ -112,7 +112,7 @@ class LoginRoute extends Component {
               {this.passwordElement()}
               {showSubmitError && <p className="error-msg">{errorMsg}</p>}
               <button type="submit" className="sign-button">
-                Sign in
+                Login
               </button>
             </form>
           </div>

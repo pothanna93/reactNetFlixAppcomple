@@ -107,7 +107,7 @@ class MovieItemDetails extends Component {
             <ul className="movie-info-ul-container">
               {genres.map(eachGenre => (
                 <li className="movie-list-item" key={eachGenre.id}>
-                  {eachGenre.name}
+                  <p>{eachGenre.name}</p>
                 </li>
               ))}
             </ul>
@@ -117,7 +117,7 @@ class MovieItemDetails extends Component {
             <ul className="movie-info-ul-container">
               {spokenLanguages.map(eachAudio => (
                 <li className="movie-list-item" key={eachAudio.id}>
-                  {eachAudio.language}
+                  <p>{eachAudio.language}</p>
                 </li>
               ))}
             </ul>
@@ -132,7 +132,7 @@ class MovieItemDetails extends Component {
           <div className="movie-items-div">
             <h1 className="movie-info-heading">Budget</h1>
             <p className="movie-list-item">{budget}</p>
-            <h1 className="movie-info-heading">Release Data</h1>
+            <h1 className="movie-info-heading">Release Date</h1>
             <p className="movie-list-item">{releaseDate}</p>
           </div>
         </div>

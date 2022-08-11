@@ -8,8 +8,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 @media screen and (min-width: 768px) {
   .nav-responsive-container {
@@ -118,4 +118,9 @@
   width: 40px;
   height: 40px;
   margin: 16px;
+}
+/*------test----*/
+
+.home {
+  color: blue;
 }
