@@ -1,5 +1,5 @@
-import './App.css'
 import {Switch, Route, Redirect} from 'react-router-dom'
+
 import LoginRoute from './components/LoginRoute'
 import HomeRoute from './components/HomeRoute'
 import PopularRoute from './components/PopularRoute'
@@ -8,6 +8,8 @@ import NotFound from './components/NotFound'
 import MovieItemDetails from './components/MovieItemDetails'
 import SearchRoute from './components/SearchRoute'
 import AccountRoute from './components/AccountRoute'
+
+import './App.css'
 
 const App = () => (
   <Switch>

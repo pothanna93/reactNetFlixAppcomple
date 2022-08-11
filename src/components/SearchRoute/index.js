@@ -25,7 +25,7 @@ class SearchRoute extends Component {
   }
 
   onClickSearch = async () => {
-    this.setState({apiStatus: apiStatusConstants.initial})
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const {searchInput} = this.state
 
     const jwtToken = Cookies.get('jwt_token')

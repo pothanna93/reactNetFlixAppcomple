@@ -17,7 +17,7 @@ const apiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class OriginalSlideCard extends Component {
+class OriginalRoute extends Component {
   state = {
     originalLists: [],
     apiStatus: apiStatusConstants.initial,
@@ -126,4 +126,4 @@ class OriginalSlideCard extends Component {
     return <div className="slide-container">{this.renderAll()}</div>
   }
 }
-export default OriginalSlideCard
+export default OriginalRoute

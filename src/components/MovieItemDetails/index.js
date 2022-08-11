@@ -58,12 +58,12 @@ class MovieItemDetails extends Component {
         runtime: each.runtime,
         posterPath: each.poster_path,
       }))
-      // console.log(updatedData)
+
       const genresData = data.movie_details.genres.map(each => ({
         id: each.id,
         name: each.name,
       }))
-      // console.log(genresData)
+
       const updatedSimilarData = data.movie_details.similar_movies.map(
         each => ({
           id: each.id,
@@ -71,7 +71,7 @@ class MovieItemDetails extends Component {
           title: each.title,
         }),
       )
-      // console.log(updatedSimilarData)
+
       const updatedLanguagesData = data.movie_details.spoken_languages.map(
         each => ({
           id: each.id,

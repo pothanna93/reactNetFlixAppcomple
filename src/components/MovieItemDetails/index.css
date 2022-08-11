@@ -1,6 +1,7 @@
 .movie-item-container {
   border: 1px solid red;
   background-color: #131313;
+  min-height: 100vh;
 }
 .poster-container {
   border: 1px solid green;

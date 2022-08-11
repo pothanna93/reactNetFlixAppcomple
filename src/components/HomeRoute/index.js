@@ -7,9 +7,9 @@ import HomePoster from '../HomePoster'
 import TrendingRoute from '../TrendingRoute'
 import OriginalRoute from '../OriginalRoute'
 import FooterRoute from '../FooterRoute'
+import FailureView from '../FailureView'
 
 import './index.css'
-import FailureView from '../FailureView'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -43,15 +43,19 @@ class HomeRoute extends Component {
     const response = await fetch(originalsUrl, options)
     if (response.ok === true) {
       const data = await response.json()
-      const fetchedData = data.results.map(eachItem => ({
-        backdropPath: eachItem.backdrop_path,
-        posterPath: eachItem.poster_path,
-        id: eachItem.id,
-        overview: eachItem.overview,
-        title: eachItem.title,
-      }))
+      const fetchedDataLength = data.results.length
+      const randomPoster =
+        data.results[Math.floor(Math.random() * fetchedDataLength)]
+
+      const updatedData = {
+        id: randomPoster.id,
+        backdropPath: randomPoster.backdrop_path,
+        title: randomPoster.title,
+        overview: randomPoster.overview,
+        posterPath: randomPoster.poster_path,
+      }
       this.setState({
-        originalsList: fetchedData,
+        originalsList: {...updatedData},
         apiStatus: apiStatusConstants.success,
       })
     } else {
@@ -85,17 +89,15 @@ class HomeRoute extends Component {
 
   renderSuccessView = () => {
     const {originalsList} = this.state
-    const singleObject =
-      originalsList[Math.floor(Math.random() * originalsList.length)]
 
     return (
       <div className="home-poster-div">
-        <HomePoster posterDetails={singleObject} />
+        <HomePoster posterDetails={originalsList} />
       </div>
     )
   }
 
-  renderHomePoster = () => {
+  renderAll = () => {
     const {apiStatus} = this.state
     switch (apiStatus) {
       case apiStatusConstants.success:
@@ -114,7 +116,7 @@ class HomeRoute extends Component {
     return (
       <>
         <div className="home-app-container">
-          {this.renderHomePoster()}
+          {this.renderAll()}
           <div className="home-responsive-container">
             <h1 className="slide-title">Trending Now</h1>
 

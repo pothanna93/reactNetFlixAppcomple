@@ -94,7 +94,7 @@ class TrendingRoute extends Component {
   }
 
   onRetry = () => {
-    this.getHomePagePoster()
+    this.getTrendItems()
   }
 
   renderFailureView = () => (
